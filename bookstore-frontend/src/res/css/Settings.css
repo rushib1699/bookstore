@@ -1,0 +1,25 @@
+.settings-box {
+    margin-top: 2%;
+    margin-left: 11%;
+    font-size: 25px;
+    font-family: monospace;
+}
+.settings-box ul {
+    border-radius: 10px;
+    border: 2px solid grey;
+    padding: 20px;
+    width: 90%;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
+}
+.settings-box h1 {
+    font-size: 25px;
+}
+.settings-box li {
+    list-style: none;
+}
+
+.settings-box li:nth-child(5) {
+    color:red;
+    font-size: 20px;
+}

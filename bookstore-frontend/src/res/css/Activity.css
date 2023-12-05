@@ -1,0 +1,89 @@
+.DropDown{
+    display: flex;
+    padding-top: 10px;
+}
+.label{
+    padding-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.label2{
+    font-size: 20px;
+    padding-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.item-services {
+    display: flex;
+}
+.service-data{
+    font-size: 20px;
+    padding-right: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkmagenta;
+    font-weight: bolder;
+}
+.input-fields{
+    padding-top: 10px;
+
+    display: flex;
+}
+.DialogBox{
+    width: 50px;
+    height: 50px;
+}
+
+.Date{
+    padding-top: 10px;
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.Buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.export-button{
+    position: relative !important;
+    margin-bottom: 1%;
+    left: 2.25%;
+    height: 37px !important;
+}
+
+.purchase-history-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    max-height: 600px; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  }
+  
+  .purchase-item {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .purchase-item img {
+    max-width: 100px;
+    max-height: 120px;
+    margin-right: 10px;
+  }
+  
+  .purchase-details {
+    flex-grow: 1;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .paid-label {
+    color: #008000; /* Green color for "Paid" */
+    font-weight: bold;
+  }
+  
+  /* Add some additional styles as needed */
+  

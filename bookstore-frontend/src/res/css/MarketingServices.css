@@ -1,0 +1,13 @@
+.ms-add-btn{
+    position: relative;
+    top: 2%;
+    left: 6.7%;
+    width: 180px;
+    height: 37px;
+}
+
+.ms-hide-btn{
+    position: relative;
+    left: 5.9%;
+    bottom: 0.75px;
+}

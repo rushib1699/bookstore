@@ -1,0 +1,42 @@
+.notes-table {
+    font-size: 15px;
+    overflow-y: auto;
+    overflow-y: scroll;
+    table-layout: auto;
+    min-width: 99%;
+  }
+  .notes-table thead th {
+    position: sticky;
+    top: 0;
+    table-layout: fixed;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  td {
+    padding: 4px 4px;
+    border: 1px solid #ccc; 
+   }
+
+  tbody tr:hover {
+
+    cursor :pointer;
+  }
+  tbody {
+    min-width: 99%;
+
+  }
+  th {
+    background: #eee;
+    padding: 8px 4px;
+  }
+  
+  .notes-table tr:hover {
+    background-color: rgb(201, 201, 201);
+}
+.delete-btn:hover {
+  color: red;
+}
+.note-input {
+  width: 400px;
+}

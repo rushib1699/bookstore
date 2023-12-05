@@ -1,0 +1,41 @@
+.navbar {
+    margin-left: 6%;
+    background-color: #12344d;
+    width: auto;
+    height: 70px;
+    
+  }
+ #navbar-text {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    cursor:default;
+  }
+  /* .navbar-user {
+    color: white;
+    font-size: 30px;
+    text-align: right;
+    position: relative;
+    margin-right: 10%;
+    margin-top: 1%;
+    float: right;
+    cursor:default;
+  }
+  .navbar button {
+    background-color: Transparent;
+    border: none;
+    cursor:pointer;
+    
+  }
+  .navbar-setting {
+    position: absolute;
+    margin-left: 65%;
+    margin-top: 1%;
+  
+  }
+  .navbar-logout {
+    position: absolute;
+    margin-left: 86%;
+    margin-top: 1%;
+  }
+   */

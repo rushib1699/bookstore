@@ -1,0 +1,106 @@
+#divider{
+    border: 1px solid white;
+}
+
+.sidenavbar {
+    height: 100%;
+    width: 9%;
+    background-color: #12344d;
+    top: 0;
+    position: absolute;
+  }
+  
+  .sidebarlist {
+    width: 100%;
+    top: 0%;
+    padding: 0;
+    font-weight: bold;
+    font-size: 18px;
+    list-style: none;
+  }
+
+  .navLink{
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    justify-content: flex-start;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    list-style-type: none;
+    color: white;
+    text-decoration: none;
+  }
+
+  
+  .sidebarlist a:hover {  
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0px 0px 6px white;
+  }
+  
+.profile{
+    padding: 8%;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+#settings{
+font-size: 1.5em;
+color: white;
+margin-left: 25px;
+}
+
+#settings:hover{
+   font-size: 1.75em;
+}
+
+.sett-logout {
+display: flex;
+width: 100%;
+height: 30px;
+flex-direction: row;
+justify-content:space-between;
+}
+
+#logout{
+    cursor: pointer;
+    color: red;
+    border: none;
+    background: none;
+    font-size: 2em;
+    margin-right: 25px;
+    margin-bottom: 1px;
+}
+
+#logout:hover{
+  font-size: 2.25em;
+}
+
+.icons{
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    font-size: 1.25em;
+}
+
+#profile-icon{
+  width: 40px;
+  height: 40px;
+}
+
+#username{
+    font-size: 18px;
+}
+
+#logoWithName{
+   background-color: white;
+   border-bottom: 5px solid #12344d;
+   width: auto;
+   height: 70px;
+   padding: 12px;
+}
+
+

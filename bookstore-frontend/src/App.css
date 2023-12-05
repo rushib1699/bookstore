@@ -1,0 +1,20 @@
+.switch-wrapper{
+  position: realtive;
+}
+
+.switch-wrapper div{
+  position: absolute;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+ body {
+  padding: 0px;
+  margin: 0px;
+  min-width: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+

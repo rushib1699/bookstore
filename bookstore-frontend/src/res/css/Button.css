@@ -1,0 +1,22 @@
+.Add-button {
+    /* width: 180px;
+    height: 37px; */
+    /* margin-left: 6.8%;
+    margin-top: 23px; */
+    border:2px solid #4CAF50;
+    color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+.Add-Button{
+    position: relative;
+    top: 5.8%;
+    left: 6.7%;
+    width: 180px;
+    height: 37px;
+}
+
+.Add-button:hover{
+    background-color: #4CAF50;
+    color: rgb(255, 255, 255);
+}

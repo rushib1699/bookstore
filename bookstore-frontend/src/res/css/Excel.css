@@ -1,0 +1,15 @@
+
+.export-button {
+    margin-top: 25px;
+    width: 250px;
+    height: 35px;
+    border:2px solid #0b97d8;
+    border-radius: 5px;
+    color: black; 
+    background-color: rgb(255, 255, 255);
+}
+
+.export-button:hover{
+    background-color: #0b97d8;
+    color: rgb(255, 255, 255);
+}
