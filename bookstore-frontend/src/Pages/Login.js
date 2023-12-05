@@ -53,7 +53,7 @@ function Login() {
   Axios.defaults.withCredentials = true;
   const checkLogin = () => {
     if ((username !== "") && (password !== "")) {
-      Axios.post(apis.LOGIN, {
+      Axios.post('http://localhost:3008/login', {
         username: username,
         pass: password,
       }).then((response) => {
@@ -61,10 +61,10 @@ function Login() {
           setLoginError(response.data.message)
         }
         else {
-          sessionStorage.setItem('user-name', response.data.result[0].username)
-          sessionStorage.setItem('user-id', response.data.result[0].id)
+          sessionStorage.setItem('user-name', response.data.result[0].Username)
+          sessionStorage.setItem('user-id', response.data.result[0].UserID)
           sessionStorage.setItem('login-status', response.data.isLoggedIn)
-          sessionStorage.setItem('team_id', response.data.result[0].team_id)
+          sessionStorage.setItem('role', response.data.result[0].RoleID)
           sessionStorage.setItem('token', response.data.token)
           history.push({
             pathname: '/home'

@@ -25,13 +25,12 @@ function SideNavBar() {
     console.log(logoutTime)
     console.log((((Date.now() - localStorage.getItem('login-time_cal')) / (1000)) / 60).toFixed(2));
 
-    Axios.post(apis.LOGOUT, {
-
-      logInTime: localStorage.getItem('login-time'),
-      logOutTime: logoutTime,
-      loggedDuration: (((Date.now() - localStorage.getItem('login-time_cal')) / (1000)) / 60).toFixed(2),
-      username: sessionStorage.getItem('user-name'),
-      userId: sessionStorage.getItem('user-id')
+    Axios.post('http://localhost:3008/logout', {
+      // logInTime: localStorage.getItem('login-time'),
+      // logOutTime: logoutTime,
+      // loggedDuration: (((Date.now() - localStorage.getItem('login-time_cal')) / (1000)) / 60).toFixed(2),
+      // username: sessionStorage.getItem('user-name'),
+      // userId: sessionStorage.getItem('user-id')
     }).then((response) => {
       sessionStorage.clear()
       localStorage.clear()

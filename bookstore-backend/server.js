@@ -9,10 +9,22 @@ const multer = require('multer');
 const aws = require('aws-sdk');
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 const multerS3 = require('multer-s3');
+const fs = require('fs');
+const bcrypt = require("bcrypt");
+
 
 const app = express();
 const port = 3008;
 
+
+var private_key = null;
+fs.readFile('/Users/rushibedagkar/bookstore/keys/private-key.pem', 'utf8', (err, data_private) => {
+    if (err) {
+        console.log(err)
+    } else {
+        private_key = data_private
+    }
+})
 // MySQL database connection setup
 const db = mysql.createConnection({
   host: 'localhost',
@@ -72,41 +84,41 @@ const checkToken = (req, res, next) => {
 };
 
 // Login API
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  const query = 'SELECT * FROM Users WHERE Username = ? AND Password = ?';
-  db.query(query, [username, password], (err, results) => {
-    if (err) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      if (results.length > 0) {
-        const user = results[0];
-        const token = jwt.sign({ userID: user.UserID, username: user.Username }, 'your_jwt_secret', {
-          expiresIn: '1h', // Token expires in 1 hour
-        });
+// app.post('/login', (req, res) => {
+//   const { username, password } = req.body;
+//   const query = 'SELECT * FROM Users WHERE Username = ? AND Password = ?';
+//   db.query(query, [username, password], (err, results) => {
+//     if (err) {
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     } else {
+//       if (results.length > 0) {
+//         const user = results[0];
+//         const token = jwt.sign({ userID: user.UserID, username: user.Username }, 'your_jwt_secret', {
+//           expiresIn: '1h', // Token expires in 1 hour
+//         });
 
-        // Save the token in the session
-        req.session.token = token;
+//         // Save the token in the session
+//         req.session.token = token;
 
-        res.json({ message: 'Login successful', token, user });
-      } else {
-        res.status(401).json({ error: 'Invalid credentials' });
-      }
-    }
-  });
-});
+//         res.json({ message: 'Login successful', token, user });
+//       } else {
+//         res.status(401).json({ error: 'Invalid credentials' });
+//       }
+//     }
+//   });
+// });
 
-// Logout API
-app.post('/logout', (req, res) => {
-  // Destroy the session
-  req.session.destroy((err) => {
-    if (err) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json({ message: 'Logout successful' });
-    }
-  });
-});
+// // Logout API
+// app.post('/logout', (req, res) => {
+//   // Destroy the session
+//   req.session.destroy((err) => {
+//     if (err) {
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     } else {
+//       res.json({ message: 'Logout successful' });
+//     }
+//   });
+// });
 
 // Protected route with JWT token validation middleware
 app.get('/protected', checkToken, (req, res) => {
@@ -411,6 +423,72 @@ app.get('/authors', (req, res) => {
 
 
 /*************** */
+
+
+/****************Login */
+
+app.post('/login', (req, res) => {
+  const username = req.body.username;
+  const pass = req.body.pass;
+  console.log(username)
+  let query =
+      `SELECT * FROM Users u WHERE Email = ? and isActive = 1 and isDeleted = 0`;
+  try {
+      db.query(query, username, (error, result) => {
+          if (error) {
+              res.send(error);
+          }
+          if (result.length > 0) {
+              bcrypt.compare(pass, result[0].Password, (e, r) => {
+                  if (r) {
+                      req.session.user = result;
+                      var signOptions = {
+                          expiresIn: "12h",
+                          algorithm: "RS256"
+                      }
+                      const token = jwt.sign({ result }, private_key, signOptions);
+                      //console.log(token)
+                      res.send({ isLoggedIn: true, result, token });
+                  } else {
+                      res.send({ message: "Wrong username and/or Password" });
+                  }
+              });
+          }
+      });
+  } catch (error) {
+      console.log(error);
+      res.send({ message: "Something Went Wrong, Please Try Again " });
+  }
+});
+/****************** */
+
+
+/***************logout */
+
+app.post("/", (req, res) => {
+  // const userid = req.body.userId;
+  // const username = req.body.username;
+  // const time = req.body.loggedDuration;
+  // const loginTimeStamp = req.body.logInTime;
+  // const logOutTimeStamp = req.body.logOutTime;
+
+  // console.log(`User, ${username}: ${userid} was logged in for ${time} min`);
+
+  let query =
+      `INSERT INTO session_details (login_timestamp, logout_timestamp, duration, users_id) VALUES (?, ?, ?, ?)`;
+  try {
+      // db.query(query, [loginTimeStamp, logOutTimeStamp, time, userid]);
+
+      req.session.destroy();
+      res.send({ isLoggedIn: false });
+  }
+  catch (error) {
+      console.log(error);
+      res.send({ message: "Something Went Wrong, Please Try Again " });
+  }
+});
+
+/****************** */
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
