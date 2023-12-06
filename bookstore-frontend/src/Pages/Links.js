@@ -45,10 +45,14 @@ function Links() {
         return <Redirect to='/' />
     }
     const fetchCart = () => {
-        Axios.get('http://localhost:3008/cart', {
+        Axios.get('https://api.patelauto.co/cart', {
             params: {
                 user_id: sessionStorage.getItem('user-id'),
             },
+            withCredentials: true,
+              headers: {
+                authorization: `Bearer ${Access_token}`,
+              }
         })
           .then((response) => {
             setCart(response.data);
@@ -70,7 +74,7 @@ function Links() {
         // You can use Axios to make a DELETE request to your server endpoint
         // Update the cart state after successfully removing the item
         // Example:
-        // Axios.post(`http://localhost:3008/deleteBookCart`, {
+        // Axios.post(`https://api.patelauto.co/deleteBookCart`, {
         //     cart_id: itemId
         // })
         //   .then((response) => {
@@ -81,9 +85,11 @@ function Links() {
         //     console.error('Error removing item from cart:', error);
         //   });
         try {
-            await Axios.post(`http://localhost:3008/deleteBookCart`, {
+            await Axios.post(`https://api.patelauto.co/deleteBookCart`, {
                 cart_id: itemId
-            });
+            },      { headers: {
+              authorization: `Bearer ${Access_token}`,
+            }});
     
             // Update the cart state after successfully removing the item
             // Fetch the updated cart data
@@ -95,14 +101,14 @@ function Links() {
         for (const book of cart) {
             try {
                 // First request to create purchase history
-                await Axios.post(`http://localhost:3008/createPurchasehistory`, {
+                await Axios.post(`https://api.patelauto.co/createPurchasehistory`, {
                     user_id: sessionStorage.getItem('user-id'),
                     book_id: book.BookID
                 });
                 console.log(`Purchase history created for BookID: ${book.BookID}`);
     
                 // Second request to delete book from cart
-                await Axios.post(`http://localhost:3008/deleteBookCart`, {
+                await Axios.post(`https://api.patelauto.co/deleteBookCart`, {
                     cart_id: book.id
                 });
                 console.log(`Book deleted from cart for BookID: ${book.BookID}`);
@@ -114,6 +120,33 @@ function Links() {
         }
         fetchCart();
       };
+      
+
+
+      const handleRentNow = async () => {
+        for (const book of cart) {
+            try {
+                // First request to create purchase history
+                await Axios.post(`https://api.patelauto.co/createRentHistory`, {
+                    user_id: sessionStorage.getItem('user-id'),
+                    book_id: book.BookID
+                });
+                console.log(`Rent history created for BookID: ${book.BookID}`);
+    
+                // Second request to delete book from cart
+                await Axios.post(`https://api.patelauto.co/deleteBookCart`, {
+                    cart_id: book.id
+                });
+                console.log(`Book deleted from cart for BookID: ${book.BookID}`);
+            } catch (error) {
+                console.error(`Error processing BookID: ${book.BookID}`, error);
+                // Handle the error if needed
+                // If you want to stop the loop on error, you can use "break;"
+            }
+        }
+        fetchCart();
+      };
+
     // if (loading) {
     //     return <p>Data is loading...</p>;
     // }
@@ -240,11 +273,14 @@ function Links() {
                 <h3>{item.Titleitle}</h3>
                 <p>Price: ${item.Price}</p>
                 <button onClick={() => removeFromCart(item.id)}>Remove from Cart</button>
+                
               </div>
             </li>
           ))}
         </ul>
         <button onClick={handleBuyNow}>Buy Now</button>
+        <button onClick={handleRentNow}>Rent Now</button>
+
       </aside>
       </div>
     )

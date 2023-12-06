@@ -97,8 +97,10 @@ function Activity() {
   // /*********************TABLE FILTERS*****************************************************/
 
   useEffect(() => {
-    Axios.get('http://localhost:3008/purchaseHistory', {
-      user_id: sessionStorage.getItem('user-id'),
+    Axios.get('https://api.patelauto.co/purchaseHistory', {
+      params: {
+        user_id: sessionStorage.getItem('user-id'),
+    }
     }).then((response) => {
       setPurchaseData(response.data);
     });

@@ -13,20 +13,24 @@ function Home() {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
   const [selectedPublishDate, setSelectedPublishDate] = useState('');
+  
   const Access_token = sessionStorage.getItem('token');
+
   const config = {
     headers: {
       Authorization: `Bearer ${Access_token}`,
-    },
-    params: {
-      id: sessionStorage.getItem('user-id'),
-      team_id: sessionStorage.getItem('team_id'),
-    },
+    }
   };
+ // console.log('Access_token:', Access_token);
+
 
   useEffect(() => {
     // Fetch books initially
-    Axios.get('http://localhost:3008/getBooks')
+    Axios.get('https://api.patelauto.co/getBooks', {
+      headers: {
+        authorization: `Bearer ${Access_token}`,
+      }
+    })
       .then((response) => {
         setBooks(response.data);
         setFilteredBooks(response.data);
@@ -41,9 +45,13 @@ function Home() {
   };
   const addToCart = (book) => {
     // Implement the logic to add the book to the cart
-    Axios.post('http://localhost:3008/addBookCart', {
+    Axios.post('https://api.patelauto.co/addBookCart', {
       user_id: sessionStorage.getItem('user-id'),
       book_id: book.BookID,
+    }, {
+      headers: {
+        authorization: `Bearer ${Access_token}`,
+      }
     })
       .then((response) => {
         console.log(response.data);

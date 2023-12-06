@@ -20,12 +20,13 @@ function SideNavBar() {
   const apis = require("../Config/API.json");
   const history = useHistory();
   const user = sessionStorage.getItem('user-name')
+  const role = sessionStorage.getItem('role')
   const logOut = () => {
     let logoutTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
     console.log(logoutTime)
     console.log((((Date.now() - localStorage.getItem('login-time_cal')) / (1000)) / 60).toFixed(2));
 
-    Axios.post('http://localhost:3008/logout', {
+    Axios.post('https://api.patelauto.co/logout', {
       // logInTime: localStorage.getItem('login-time'),
       // logOutTime: logoutTime,
       // loggedDuration: (((Date.now() - localStorage.getItem('login-time_cal')) / (1000)) / 60).toFixed(2),
@@ -90,13 +91,30 @@ function SideNavBar() {
           </NavLink>
         </li>
     <br></br>
-         <li>
+    <li>
+          <NavLink className="navLink" to="/allrenewals"
+            exact activeStyle={{ backgroundColor: "rgb(119, 191, 67)", boxShadow: "none" }}>
+            <BsArrowRepeat className='icons' />
+            <span className="" >Rent History</span>
+          </NavLink>
+        </li>
+        <br></br>
+{ /*        <li>
           <NavLink className="navLink" to="/uploadBook"
             exact activeStyle={{ backgroundColor: "rgb(119, 191, 67)", boxShadow: "none" }}>
             <RiTeamFill className="icons" />
             Add Book
           </NavLink>
-        </li>
+        </li>*/}
+         {role === '2' && (
+          <li>
+            <NavLink className="navLink" to="/uploadBook"
+              exact activeStyle={{ backgroundColor: "rgb(119, 191, 67)", boxShadow: "none" }}>
+              <RiTeamFill className="icons" />
+              Add Book
+            </NavLink>
+          </li>
+        )}
 
        {/* <li>
           <NavLink className="navLink" to="/marketingservices"

@@ -5,3 +5,38 @@
     width: 180px;
     height: 37px;
 }
+
+.purchase-history-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    max-height: 600px; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  }
+  
+  .purchase-item {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .purchase-item img {
+    max-width: 100px;
+    max-height: 120px;
+    margin-right: 10px;
+  }
+  
+  .purchase-details {
+    flex-grow: 1;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .paid-label {
+    color: #008000; /* Green color for "Paid" */
+    font-weight: bold;
+  }
+  

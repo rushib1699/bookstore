@@ -27,10 +27,10 @@ function BookUpload() {
 
   const fetchAuthorsAndGenres = async () => {
     try {
-      const authorsResponse = await axios.get('http://localhost:3008/authors');
+      const authorsResponse = await axios.get('https://api.patelauto.co/authors');
       setAuthors(authorsResponse.data);
 
-      const genresResponse = await axios.get('http://localhost:3008/genres');
+      const genresResponse = await axios.get('https://api.patelauto.co/genres');
       setGenres(genresResponse.data);
     } catch (error) {
       console.error('Error fetching authors and genres:', error);
@@ -59,7 +59,7 @@ function BookUpload() {
       formData.append('stockQuantity', stockQuantity);
       formData.append('image', image);
 
-      const response = await axios.post('http://localhost:3008/uploadAzure', formData);
+      const response = await axios.post('https://api.patelauto.co/uploadAzure', formData);
 
       if (response.data.success) {
         // Show success notification
